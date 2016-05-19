@@ -41,6 +41,8 @@ private slots:
 
     void on_actionDelete_triggered();
 
+    void on_actionGo_to_cell_triggered();
+
 private:
     void createActions();
     void createMenus();

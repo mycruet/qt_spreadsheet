@@ -12,3 +12,9 @@ GoToCellDialog::~GoToCellDialog()
 {
     delete ui;
 }
+ QString GoToCellDialog::getlineEdit()
+ {
+
+     return ui->lineEdit->text();
+
+ }

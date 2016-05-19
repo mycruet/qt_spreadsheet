@@ -5,6 +5,7 @@
 #include <QCloseEvent>
 #include <QFileInfo>
 #include "finddialog.h"
+#include "gotocelldialog.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -220,4 +221,17 @@ void MainWindow::on_actionFind_triggered()
 void MainWindow::on_actionDelete_triggered()
 {
     qDebug("delet file");
+}
+
+void MainWindow::on_actionGo_to_cell_triggered()
+{
+    GoToCellDialog dialog(this);
+
+    if (dialog.exec()) {
+
+        QString str = dialog.getlineEdit().toUpper();
+        qDebug("go to cell [%d,%d]", str.mid(1).toInt() - 1, str[0].unicode() - 'A');
+        //spreadsheet->setCurrentCell(str.mid(1).toInt() - 1,  str[0].unicode() - 'A');
+    }
+
 }

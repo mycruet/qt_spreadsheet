@@ -14,7 +14,7 @@ class GoToCellDialog : public QDialog
 public:
     explicit GoToCellDialog(QWidget *parent = 0);
     ~GoToCellDialog();
-    
+    QString getlineEdit();
 private:
     Ui::GoToCellDialog *ui;
 };
