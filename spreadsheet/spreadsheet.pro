@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,8 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    finddialog.cpp \
+    gotocelldialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    finddialog.h \
+    gotocelldialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    finddialog.ui \
+    gotocelldialog.ui
+
+RESOURCES += \
+    spreadsheet.qrc
