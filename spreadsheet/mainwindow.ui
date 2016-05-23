@@ -71,17 +71,21 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <addaction name="actionSort"/>
+    <addaction name="action_Recalc"/>
    </widget>
    <widget class="QMenu" name="menuOption">
     <property name="title">
      <string>Options</string>
     </property>
     <addaction name="actionShowGrid"/>
+    <addaction name="action_Auto_recalculate"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="action_about"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
    <addaction name="menuFile"/>
@@ -281,6 +285,32 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="actionSort">
+   <property name="text">
+    <string>&amp;sort...</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>&amp;about</string>
+   </property>
+  </action>
+  <action name="action_Recalc">
+   <property name="text">
+    <string>&amp;Recalculate</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+  <action name="action_Auto_recalculate">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Auto-recalculate</string>
    </property>
   </action>
  </widget>

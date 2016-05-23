@@ -43,9 +43,14 @@ private slots:
 
     void on_actionGo_to_cell_triggered();
 
+    void on_actionSort_triggered();
+
+    void on_action_about_triggered();
+
 private:
     void createActions();
     void createMenus();
+    void createContextMenu();
     void createStatusBar();
  //
  private:
@@ -53,6 +58,8 @@ private:
     bool loadFile(const QString &fileName);
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
+    void writeSettings();
+    void readSettings();
 //can not be setted up by designer
 private:
     QLabel *locationLabel;

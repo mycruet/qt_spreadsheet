@@ -6,17 +6,24 @@
 #include <QFileInfo>
 #include "finddialog.h"
 #include "gotocelldialog.h"
+#include "sortdialog.h"
+#include <QSettings>
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+
     createActions();
     createMenus();
+    createContextMenu();
     createStatusBar();
-
+    readSettings();
     findDialog = 0;
+    setCurrentFile("");
 }
 
 MainWindow::~MainWindow()
@@ -107,11 +114,21 @@ void MainWindow::createStatusBar()
                this, SLOT(spreadsheetModified()));
        updateStatusBar();
     */
-
-
-
 }
 
+void MainWindow::createContextMenu()
+{
+#if 0
+    spreadsheet->addAction(cutAction);
+    spreadsheet->addAction(copyAction);
+    spreadsheet->addAction(pasteAction);
+    spreadsheet->setContextMenuPolicy(Qt::ActionsContextMenu);
+  #endif
+    ui->tableWidget->addAction(ui->actionCut);
+    ui->tableWidget->addAction(ui->actionCopy);
+    ui->tableWidget->addAction(ui->actionPaste);
+    ui->tableWidget->setContextMenuPolicy(Qt::ActionsContextMenu);
+}
 
 bool MainWindow::loadFile(const QString &fileName)
 {
@@ -235,3 +252,71 @@ void MainWindow::on_actionGo_to_cell_triggered()
     }
 
 }
+
+void MainWindow::on_actionSort_triggered()
+{
+    qDebug("sort....");
+
+    SortDialog dialog(this);
+    //QTableWidgetSelectionRange range = spreadsheet->selectedRange();
+    //dialog.setColumnRange('A' + range.leftColumn(),  'A' + range.rightColumn());
+    if (dialog.exec()) {
+#if 0
+        SpreadsheetCompare compare;
+        compare.keys[0] =
+                dialog.primaryColumnCombo->currentIndex();
+        compare.keys[1] =
+                dialog.secondaryColumnCombo->currentIndex() - 1;
+        compare.keys[2] =
+                dialog.tertiaryColumnCombo->currentIndex() - 1;
+        compare.ascending[0] =
+                (dialog.primaryOrderCombo->currentIndex() == 0);
+        compare.ascending[1] =
+                (dialog.secondaryOrderCombo->currentIndex() == 0);
+        compare.ascending[2] =
+                (dialog.tertiaryOrderCombo->currentIndex() == 0);
+        spreadsheet->sort(compare);
+#endif
+    }
+
+}
+
+void MainWindow::on_action_about_triggered()
+{
+    QMessageBox::about(this, tr("About Spreadsheet"),
+                tr("<h2>Spreadsheet 1.1</h2>"
+                   "<p>Copyright &copy; 2006 Software Inc."
+                   "<p>Spreadsheet is a small application that "
+                   "demonstrates QAction, QMainWindow, QMenuBar, "
+                   "QStatusBar, QTableWidget, QToolBar, and many other "
+                   "Qt classes."));
+
+}
+
+
+void MainWindow::writeSettings()
+{
+    QSettings settings("Software Inc.", "Spreadsheet");
+    settings.setValue("geometry", geometry());
+    //settings.setValue("recentFiles", recentFiles);
+    settings.setValue("showGrid", ui->actionShowGrid->isChecked());
+    settings.setValue("autoRecalc", ui->action_Auto_recalculate->isChecked());
+}
+
+void MainWindow::readSettings()
+{
+    QSettings settings("Software Inc.", "Spreadsheet");
+    QRect rect = settings.value("geometry",  QRect(200, 200, 400, 400)).toRect();
+    move(rect.topLeft());
+    resize(rect.size());
+    //recentFiles = settings.value("recentFiles").toStringList();
+    //updateRecentFileActions();
+    bool showGrid = settings.value("showGrid", true).toBool();
+    ui->actionShowGrid->setChecked(showGrid);
+
+    bool autoRecalc = settings.value("autoRecalc", true).toBool();
+    ui->action_Auto_recalculate->setChecked(autoRecalc);
+}
+
+
+

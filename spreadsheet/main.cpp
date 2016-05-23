@@ -2,10 +2,12 @@
 #include <QApplication>
 #include <QSplashScreen>
 #include <QtTest/QTest>
+
 int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
+#if 0
     QSplashScreen *splash = new QSplashScreen;
     splash->setPixmap(QPixmap(":/images/images/splash.png"));
     splash->show();
@@ -24,6 +26,9 @@ int main(int argc, char *argv[])
    mainWin.show();
    splash->finish(&mainWin);
    delete splash;
-    return app.exec();
+#endif
+   MainWindow mainWin;
+   mainWin.show();
+   return app.exec();
 
 }
