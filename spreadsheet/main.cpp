@@ -27,8 +27,10 @@ int main(int argc, char *argv[])
    splash->finish(&mainWin);
    delete splash;
 #endif
-   MainWindow mainWin;
-   mainWin.show();
+  // MainWindow mainWin;
+   //mainWin.show();
+   MainWindow *mainWin = new MainWindow;
+   mainWin->show();
    return app.exec();
 
 }

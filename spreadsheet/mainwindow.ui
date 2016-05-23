@@ -47,6 +47,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSave_as"/>
     <addaction name="separator"/>
+    <addaction name="action_close"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
@@ -174,7 +175,7 @@
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>exit</string>
+    <string>&amp;exit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -311,6 +312,14 @@
    </property>
    <property name="text">
     <string>&amp;Auto-recalculate</string>
+   </property>
+  </action>
+  <action name="action_close">
+   <property name="text">
+    <string>&amp;close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
    </property>
   </action>
  </widget>

@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setAttribute(Qt::WA_DeleteOnClose);
 
     createActions();
     createMenus();
@@ -28,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    qDebug("~MainWindow");
     delete ui;
 }
 
@@ -39,6 +41,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
             //writeSettings();
             event->accept();
         } else {
+            qDebug("ignore close event");
             event->ignore();
         }
 }
@@ -65,10 +68,14 @@ bool MainWindow::okToContinue()
 void MainWindow::on_actionNew_triggered()
 {
     qDebug("new file");
+#if 0
     if (okToContinue()) {
            //spreadsheet->clear();
            //setCurrentFile("");
        }
+  #endif
+    MainWindow *mainWin = new MainWindow;
+    mainWin->show();
 
 }
 void MainWindow::createActions()
@@ -86,8 +93,10 @@ void MainWindow::createActions()
     */
 
      connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+     connect(ui->actionExit, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
      connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(on_actionSave_triggered()));
      connect(ui->actionSave_as, SIGNAL(triggered()), this, SLOT(on_actionSave_as_triggered()));
+
 }
 
 void MainWindow::createMenus()
@@ -317,6 +326,5 @@ void MainWindow::readSettings()
     bool autoRecalc = settings.value("autoRecalc", true).toBool();
     ui->action_Auto_recalculate->setChecked(autoRecalc);
 }
-
 
 
